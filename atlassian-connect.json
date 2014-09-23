@@ -1,10 +1,10 @@
 {
-    "key": "gifbot",
-    "name": "GifBot",
+    "key": "hipgif",
+    "name": "HipGif",
     "description": "Auto-insert Gifs",
     "vendor": {
         "name": "Mark Ryan",
-        "url": "https://americangreetings.com"
+        "url": "http://hipgif.herokuapp.com"
     },
     "links": {
         "self": "{{localBaseUrl}}/atlassian-connect.json",
@@ -26,7 +26,7 @@
             "url": "{{localBaseUrl}}/webhook",
             "pattern": "^/gif",
             "event": "room_message",
-            "name": "Gif Request"
+            "name": "HipGif Request"
         }
     }
 }
