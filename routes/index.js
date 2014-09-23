@@ -1,6 +1,6 @@
 var http = require('request');
 
-var giphyAPI = "http://api.giphy.com/v1/gifs/translate?s=[QUERY]&api_key=dc6zaTOxFJmzC&limit=1&rating=pg-13"
+var giphyAPI = "http://api.giphy.com/v1/gifs/translate?s=[QUERY]&api_key=dc6zaTOxFJmzC&limit=1&rating=g"
 
 module.exports = function (app, addon) {
   var hipchat = require('../lib/hipchat')(addon);
