@@ -1,0 +1,59 @@
+{
+    "key": "my-test-app-key",
+    "name": "My Test App Name",
+    "version": "1",
+    "description": "My test app description.",
+    "vendor": {
+        "name": "My Company",
+        "url": "http://example.com"
+    },
+    "baseUrl": "{{localBaseUrl}}",
+    "authentication": {
+        "type": "jwt"
+    },
+    "links": {
+        "self": "{{localBaseUrl}}/atlassian-connect.json",
+        "homepage": "http://www.example.com"
+    },
+    "lifecycle": {
+        "installed": "/installed"
+    },
+    "modules": {
+        "webItems": [{
+            "link": "/my-general-page",
+            "location": "atl.admin/menu",
+            "context": "addon",
+            "weight": 100,
+            "dialog": false,
+            "styleClasses": [
+                "ac-link",
+                "aui-link"
+            ],
+            "tooltip": {
+                "value": "click me!",
+                "i18n": "click.me"
+            },
+            "icon": {
+                "width": 16,
+                "height": 16,
+                "url": "/some/icon.png"
+            },
+            "conditions": [],
+            "params": {},
+            "name": {
+                "value": "My Web Item",
+                "i18n": "my.webitem"
+            }
+        }],
+        "webhooks": [
+            {
+                "event": "issue_created",
+                "url": "/issueCreated"
+            },
+            {
+                "event": "plugin_test_hook",
+                "url": "/test-hook"
+            }
+        ]
+    }
+}

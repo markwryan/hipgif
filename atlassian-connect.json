@@ -1,0 +1,32 @@
+{
+    "key": "gifbot",
+    "name": "GifBot",
+    "description": "Auto-insert Gifs",
+    "vendor": {
+        "name": "Mark Ryan",
+        "url": "https://americangreetings.com"
+    },
+    "links": {
+        "self": "{{localBaseUrl}}/atlassian-connect.json",
+        "homepage": "{{localBaseUrl}}/atlassian-connect.json"
+    },
+    "capabilities": {
+        "hipchatApiConsumer": {
+            "scopes": [
+                "send_notification"
+            ]
+        },
+        "installable": {
+            "callbackUrl": "{{localBaseUrl}}/installable"
+        },
+        "configurable": {
+             "url": "{{localBaseUrl}}/config"
+        },
+        "webhook": {
+            "url": "{{localBaseUrl}}/webhook",
+            "pattern": "^/gif",
+            "event": "room_message",
+            "name": "Gif Request"
+        }
+    }
+}
