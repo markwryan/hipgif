@@ -86,7 +86,7 @@
       "adapter": "redis",
       // Again, a PaaS host like Heroku will probably provide the db connection
       // URL to you through the environment, so we tell atlassian-connect-express to use that value.
-      "url": "$DATABASE_URL"
+      "url": "$REDISCLOUD_URL"
     },
     // Make sure that your add-on can only be registered by the hosts on
     // these domains.
