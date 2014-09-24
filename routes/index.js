@@ -46,15 +46,17 @@ module.exports = function (app, addon) {
         message = message.replace(/\/gif/g, '').trim();
         encodedMessage = message.replace(/\W+/g, "+");
         var gifUrl = giphyAPI.replace("[QUERY]", encodedMessage);
-        console.log(gifUrl);
         http(gifUrl, function (error, response, body) {
           if (!error && response.statusCode == 200) {
               var json = JSON.parse(body);
-              var imageUrl = json.data.images.original.url;
-              hipchat.sendMessage(req.clientInfo, req.context.item.room.id, imageUrl)
-                .then(function(data){
-                  res.send(200);
-                });
+			  if(json !== null && json.data !== null && json.data.images !== null && json.data.images.original != null) {
+	              var imageUrl = json.data.images.original.url;
+	              hipchat.sendMessage(req.clientInfo, req.context.item.room.id, imageUrl)
+	                .then(function(data){
+	                  res.send(200);
+	                });
+			  }
+              
           }
         })
         
