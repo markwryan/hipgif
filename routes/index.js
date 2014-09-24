@@ -1,6 +1,6 @@
 var http = require('request');
 
-var giphyAPI = "http://api.giphy.com/v1/gifs/translate?s=[QUERY]&api_key=dc6zaTOxFJmzC&limit=1&rating=g"
+var giphyAPI = "http://api.giphy.com/v1/gifs/translate?s=[QUERY]&api_key=dc6zaTOxFJmzC&limit=1&rating=pg"
 
 module.exports = function (app, addon) {
   var hipchat = require('../lib/hipchat')(addon);
@@ -50,7 +50,7 @@ module.exports = function (app, addon) {
           if (!error && response.statusCode == 200) {
               var json = JSON.parse(body);
 			  if(typeof json.data.images !== 'undefined') {
-	              var imageUrl = "GIF via giphy.com " + json.data.images.original.url;
+	              var imageUrl = "GIF via giphy.com " + json.data.images.downsized.url;
 	              hipchat.sendMessage(req.clientInfo, req.context.item.room.id, imageUrl)
 	                .then(function(data){
 	                  res.send(200);
