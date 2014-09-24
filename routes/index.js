@@ -55,6 +55,10 @@ module.exports = function (app, addon) {
 	                .then(function(data){
 	                  res.send(200);
 	                });
+			  } else {
+	              hipchat.sendMessage(req.clientInfo, req.context.item.room.id, "Having trouble finding a GIF. Try again in a few minutes.")
+	                .then(function(data){
+	                  res.send(200);
 			  }
               
           }
