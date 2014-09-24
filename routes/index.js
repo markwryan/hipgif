@@ -49,7 +49,7 @@ module.exports = function (app, addon) {
         http(gifUrl, function (error, response, body) {
           if (!error && response.statusCode == 200) {
               var json = JSON.parse(body);
-			  if(json !== null && json.data !== null && json.data.images !== null && json.data.images.original != null) {
+			  if(typeof json.data.images.original !== 'undefined') {
 	              var imageUrl = json.data.images.original.url;
 	              hipchat.sendMessage(req.clientInfo, req.context.item.room.id, imageUrl)
 	                .then(function(data){
