@@ -1,0 +1,1 @@
+HipGif saves no messages. It passes information on to the giphy api and returns the response. The add on only sends notifications and only inspects messages starting with /gif
