@@ -6,6 +6,10 @@
         "name": "Mark Ryan",
         "url": "http://hipgif.herokuapp.com"
     },
+	"baseUrl": "https://hipgif.herokuapp.com",
+	"authentication": {
+	    "type": "jwt"
+	},
     "links": {
         "self": "{{localBaseUrl}}/atlassian-connect.json",
         "homepage": "{{localBaseUrl}}/atlassian-connect.json"
