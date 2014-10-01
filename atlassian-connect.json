@@ -1,5 +1,5 @@
 {
-    "key": "hipgif",
+    "key": "com.markwryan.hipgif",
     "name": "HipGif",
     "description": "Auto-insert Gifs via the /gif command! HipGif uses Giphy.com's API to translate and find a matching GIF and HipGif adds it to your conversation.",
     "vendor": {
