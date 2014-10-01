@@ -1,7 +1,4 @@
-# Atlassian Add-on using Express
+HipGif
 
-Congratulations! You've successfully created a HipChat Connect Add-on using the Express web application framework.
+A HipChat add on to /gif all the things!
 
-## What's next?
-
-[Read the docs](https://bitbucket.org/atlassian/atlassian-connect-express/src/master/README.md#markdown-header-install-dependencies).
