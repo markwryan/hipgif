@@ -54,7 +54,7 @@ module.exports = function (app, addon) {
               var json = JSON.parse(body);
 			  if(typeof json.data.images !== 'undefined') {
 	              var imageUrl = "GIF via giphy.com " + json.data.images.downsized.url;
-	              hipchat.sendMessage(req.clientInfo, req.context.item.room.id, imageUrl, opts)
+	              hipchat.sendMessage(req.clientInfo, req.context.item.room.id, imageUrl, {'color':'green'})
 	                .then(function(data){
 	                  res.send(200);
 	                });
