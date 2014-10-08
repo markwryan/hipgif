@@ -48,18 +48,19 @@ module.exports = function (app, addon) {
         var gifUrl = giphyAPI.replace("[QUERY]", encodedMessage);
         var opts = {};
         opts.color = 'green';
+        opts.options = true;
         
         http(gifUrl, function (error, response, body) {
           if (!error && response.statusCode == 200) {
               var json = JSON.parse(body);
 			  if(typeof json.data.images !== 'undefined') {
 	              var imageUrl = "GIF via giphy.com " + json.data.images.downsized.url;
-	              hipchat.sendMessage(req.clientInfo, req.context.item.room.id, imageUrl, {'color':'green'})
+	              hipchat.sendMessage(req.clientInfo, req.context.item.room.id, imageUrl, opts)
 	                .then(function(data){
 	                  res.send(200);
 	                });
 			  } else {
-	              hipchat.sendMessage(req.clientInfo, req.context.item.room.id, "Having trouble finding a GIF. Try again in a few minutes.")
+	              hipchat.sendMessage(req.clientInfo, req.context.item.room.id, "Having trouble finding a GIF. Try again in a few minutes.", opts)
 	                .then(function(data){
 	                  res.send(200);
                   });
