@@ -73,6 +73,7 @@
   // This is the production add-on configuration, which is enabled by setting
   // the NODE_ENV=production environment variable.
   "production": {
+    "giphyAPIKey": "$GIPHY_API",  
     // HipChat add-ons don't use asymmetric key algos
     "usePublicKey": false,
     // On a PaaS host like Heroku, the runtime environment will provide the
