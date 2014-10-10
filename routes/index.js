@@ -3,7 +3,7 @@ var http = require('request');
 
 module.exports = function (app, addon) {
   var hipchat = require('../lib/hipchat')(addon);
-  var giphyAPIKey = addon.config.giphyAPIKey() || "dc6zaTOxFJmzC";
+  var giphyAPIKey = "117mRFHSofeRUs";
   var giphyAPI = "http://api.giphy.com/v1/gifs/translate?s=[QUERY]&api_key=" + giphyAPIKey + "&limit=1&rating=pg"
   // Root route. This route will serve the `addon.json` unless a homepage URL is
   // specified in `addon.json`.
