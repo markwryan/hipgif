@@ -53,7 +53,7 @@ module.exports = function (app, addon) {
           if (!error && response.statusCode == 200) {
               var json = JSON.parse(body);
 			  if(typeof json.data.images !== 'undefined') {
-	              var imageUrl = "#" + message + " Powered By Giphy" ++ " " + json.data.images.downsized.url;
+	              var imageUrl = "#" + message + " Powered By Giphy " + json.data.images.downsized.url;
 	              hipchat.sendMessage(req.clientInfo, req.context.item.room.id, imageUrl, opts)
 	                .then(function(data){
 	                  res.send(200);
