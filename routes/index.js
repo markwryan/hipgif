@@ -52,11 +52,10 @@ module.exports = function (app, addon) {
         var messageAsGif = message + '.gif';
         for(var preload in preloaded) {
             if(messageAsGif == preloaded[preload]) {
-                opts.format = 'html';
-                var imageUrl = "<img src=http://hipgif.heroku.com/img/" + messageAsGif + " />";
-              hipchat.sendMessage(req.clientInfo, req.context.item.room.id, imageUrl, opts)
-                .then(function(data){
-                  res.send(200);
+                var imageUrl = "#" + message + " http://hipgif.heroku.com/img/" + messageAsGif;
+                hipchat.sendMessage(req.clientInfo, req.context.item.room.id, imageUrl, opts)
+                    .then(function(data){
+                        res.send(200);
                 });
                 return;
             }
