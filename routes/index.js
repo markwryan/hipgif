@@ -1,9 +1,10 @@
 var http = require('request');
+var fs = require('fs')
 var giphyAPI = "http://api.giphy.com/v1/gifs/translate?s=[QUERY]&api_key=117mRFHSofeRUs&limit=1&rating=pg"
 
 module.exports = function (app, addon) {
   var hipchat = require('../lib/hipchat')(addon);
-  
+  var preloaded = fs.readdirSync('../public/img');
   // Root route. This route will serve the `addon.json` unless a homepage URL is
   // specified in `addon.json`.
   app.get('/',
@@ -43,11 +44,28 @@ module.exports = function (app, addon) {
     function(req, res) {
         var message = req.context.item.message.message;
         message = message.replace(/\/gif/g, '').trim();
-        encodedMessage = message.replace(/\W+/g, "+");
-        var gifUrl = giphyAPI.replace("[QUERY]", encodedMessage);
         var opts = {};
         opts.color = 'green';
         opts.options = true;
+        
+        
+        var messageAsGif = message + '.gif';
+        for(var preload in preloaded) {
+            if(messageAsGif == preload) {
+                opts.format = 'html';
+                var imageUrl = "<img src=http://hipgif.heroku.com/img/" + messageAsGif + " />";
+              hipchat.sendMessage(req.clientInfo, req.context.item.room.id, imageUrl, opts)
+                .then(function(data){
+                  res.send(200);
+                });
+                return;
+            }
+        }
+        
+        
+        encodedMessage = message.replace(/\W+/g, "+");
+        var gifUrl = giphyAPI.replace("[QUERY]", encodedMessage);
+        
         
         http(gifUrl, function (error, response, body) {
           if (!error && response.statusCode == 200) {
