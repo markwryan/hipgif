@@ -43,48 +43,51 @@ module.exports = function (app, addon) {
     addon.authenticate(),
     function(req, res) {
         var message = req.context.item.message.message;
-        message = message.replace(/\/gif/g, '').trim();
-        var opts = {};
-        opts.color = 'green';
-        opts.options = true;
+        var slashIndex = message.indexOf('/gif');
+        if(message && slashIndex >= 0) {
+            message = message.substring(slashIndex).replace(/\/gif/g, '').trim();
+
+            var opts = {};
+            opts.color = 'green';
+            opts.options = true;
         
         
-        var messageAsGif = message + '.gif';
-        for(var preload in preloaded) {
-            if(messageAsGif == preloaded[preload]) {
-                var imageUrl = "#" + message + " http://hipgif.heroku.com/img/" + messageAsGif;
-                hipchat.sendMessage(req.clientInfo, req.context.item.room.id, imageUrl, opts)
-                    .then(function(data){
-                        res.send(200);
-                });
-                return;
+            var messageAsGif = message + '.gif';
+            for(var preload in preloaded) {
+                if(messageAsGif == preloaded[preload]) {
+                    var imageUrl = "#" + message + " http://hipgif.heroku.com/img/" + messageAsGif;
+                    hipchat.sendMessage(req.clientInfo, req.context.item.room.id, imageUrl, opts)
+                        .then(function(data){
+                            res.send(200);
+                    });
+                    return;
+                }
             }
-        }
         
         
-        encodedMessage = message.replace(/\W+/g, "+");
-        var gifUrl = giphyAPI.replace("[QUERY]", encodedMessage);
+            encodedMessage = message.replace(/\W+/g, "+");
+            var gifUrl = giphyAPI.replace("[QUERY]", encodedMessage);
         
         
-        http(gifUrl, function (error, response, body) {
-          if (!error && response.statusCode == 200) {
-              var json = JSON.parse(body);
-			  if(typeof json.data.images !== 'undefined') {
-	              var imageUrl = "#" + message + " Powered By Giphy " + json.data.images.downsized.url;
-	              hipchat.sendMessage(req.clientInfo, req.context.item.room.id, imageUrl, opts)
-	                .then(function(data){
-	                  res.send(200);
-	                });
-			  } else {
-	              hipchat.sendMessage(req.clientInfo, req.context.item.room.id, "Having trouble finding a GIF. Try again in a few minutes.", opts)
-	                .then(function(data){
-	                  res.send(200);
-                  });
-			  }
+            http(gifUrl, function (error, response, body) {
+              if (!error && response.statusCode == 200) {
+                  var json = JSON.parse(body);
+    			  if(typeof json.data.images !== 'undefined') {
+    	              var imageUrl = "#" + message + " Powered By Giphy " + json.data.images.downsized.url;
+    	              hipchat.sendMessage(req.clientInfo, req.context.item.room.id, imageUrl, opts)
+    	                .then(function(data){
+    	                  res.send(200);
+    	                });
+    			  } else {
+    	              hipchat.sendMessage(req.clientInfo, req.context.item.room.id, "Having trouble finding a GIF. Try again in a few minutes.", opts)
+    	                .then(function(data){
+    	                  res.send(200);
+                      });
+    			  }
               
-          }
-        })
-        
+              }
+            });
+        }
     }
      
   );
