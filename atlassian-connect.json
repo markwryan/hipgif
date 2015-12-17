@@ -28,7 +28,7 @@
         },
         "webhook": {
             "url": "{{localBaseUrl}}/webhook",
-            "pattern": "^/gif|it's working",
+            "pattern": "^/gif|^it\'s working",
             "event": "room_message",
             "name": "HipGif Request"
         }
