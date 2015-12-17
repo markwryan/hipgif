@@ -44,6 +44,18 @@ module.exports = function (app, addon) {
     function(req, res) {
         var message = req.context.item.message.message;
         var slashIndex = message.indexOf('/gif');
+        var itsWorking = message.indexOf("t's working");
+        if(message && itsWorking >= 0) {
+            var opts = {};
+            opts.color = 'green';
+            opts.options = true;
+            var imageUrl = " http://hipgif.heroku.com/img/itsworking.mp4";
+            hipchat.sendMessage(req.clientInfo, req.context.item.room.id, imageUrl, opts)
+                .then(function(data){
+                    res.send(200);
+            });
+            return;
+        }
         if(message && slashIndex >= 0) {
             message = message.substring(slashIndex).replace(/\/gif/g, '').trim();
 
